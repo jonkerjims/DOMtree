@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="圣诞树"/>
+    <meta name="author" content="抱抱"/>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+{#    <meta name="viewport" content="width=device-width, initial-scale=1"/>#}
+    {#        <meta http-equiv="refresh" content="3">#}
+
+    <title>Bui~</title>
+
+    <link href="/static/css/ui.css" rel="stylesheet" media="screen"/>
+    <link href="/static/css/domtree.css" rel="stylesheet" media="screen"/>
+    <link href='https://fonts.googleapis.com/css?family=Armata' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/static/css/audiobtn.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/js/audiobtn.js"></script>
+</head>
+<body>
+
+<!--音乐-->
+<div class="video_exist play_yinfu" id="audio_btn" style="display: block;z-index:999999;">
+    <div id="yinfu" class="rotate"></div>
+    <audio preload="auto" autoplay="autoplay" id="audio" src="/static/music/24_7.mp3" loop="loop"></audio>
+</div>
+
+<div style="position: absolute;">
+    <div class="wrapper">
+        <div class="display">
+            <div id="time">65232人</div>
+        </div>
+        <span></span>
+        <span></span>
+    </div>
+</div>
+
+<!-- 圣诞树 -->
+
+<div class="tree vintage4"><h1>{{ name }}，圣诞快乐！</h1></div>
+<script src="/static/js/domtree.js"></script>
+
+
+<!-- UI和第三方脚本 -->
+<p class="project-title vintage4" style="font-size: 25px; color: hotpink;">小伙伴，圣诞快乐！</p>
+
+</body>
+<script>
+    var _gaq = [['_setAccount', 'UA-15240703-1'], ['_trackPageview']];
+    (function (d, t) {
+        var g = d.createElement(t),
+            s = d.getElementsByTagName(t)[0];
+        g.async = true;
+        g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(g, s);
+    })(document, 'script');
+</script>
+
+
+</html>

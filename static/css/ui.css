@@ -1,0 +1,71 @@
+.project-title {
+	position: absolute;
+	left: 25px;
+	bottom: 20px;
+
+	font-size: 16px;
+	color: #fff;
+}
+
+.credits {
+	position: absolute;
+	right: 20px;
+	bottom: 25px;
+	font-size: 15px;
+	z-index: 20;
+	color: #ff0e4e;
+	vertical-align: middle;
+}
+
+.credits *+* {
+	margin-left: 15px;
+}
+
+.credits a {
+	padding: 8px 10px;
+	color: rgba(231, 19, 111, 0.7);
+	border: 2px solid rgba(255, 85, 0, 0.7);
+	text-decoration: none;
+}
+
+.credits a:hover {
+	border-color: #fff;
+	color: #fff;
+}
+
+@media screen and (max-width: 1040px) {
+	.project-title {
+		display: none;
+	}
+
+	.credits {
+		width: 100%;
+		left: 0;
+		right: auto;
+		bottom: 0;
+		padding: 30px 0;
+		background: #130b53;
+		text-align: center;
+	}
+
+	.credits a {
+		display: inline-block;
+		margin-top: 7px;
+		margin-bottom: 7px;
+	}
+}
+
+.vintage4 {
+	color: gold;
+	letter-spacing: 0;
+	text-shadow: 0px 1px 0px #999, 0px 2px 0px #888, 0px 3px 0px #777, 0px 4px 0px #666, 0px 5px 0px #555, 0px 6px 0px #444, 0px 7px 0px #333, 0px 8px 7px #001135
+}
+input{
+	background-color: green;
+}
+select{
+	background-color: red;
+}
+button{
+	background-color: gold;
+}

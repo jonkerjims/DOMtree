@@ -1,8 +1,8 @@
-const width = 600;
+const width = 700;
 const height = 550;
-const quantity = 170;
+const quantity = 200;
 const types = [ 'text', 'select', 'progress', 'meter', 'button', 'radio', 'checkbox' ];
-const greetings = [ '祝大家节日快乐','圣诞节快乐','每天都开开心心','祝代码顺利编译无bug','编译无bug','圣诞节快乐','祝收到圣诞老人的礼物','节日快乐','玩得开心','拒绝bug','生活愉快', '圣诞节快乐','节日快乐','祝一切顺利','节日的问候','心想事成','生活愉快','工作顺利' ];
+const greetings = [ '祝大家节日快乐','圣诞节快乐','每天都开开心心','祝代码顺利编译无bug','编译无bug','圣诞节快乐','祝收到圣诞老人的礼物','节日快乐','玩得开心','生活愉快', '圣诞节快乐','节日快乐','祝一切顺利','节日的问候','心想事成','生活愉快','工作顺利' ];
 
 let tree = document.querySelector( '.tree' ),
 treeRotation = 0;
@@ -74,7 +74,7 @@ for( var i = 0; i < quantity; i++ ) {
 }
 
 // 让它下雪
-for( var i = 0; i < 200; i++ ) {
+for( var i = 0; i < 300; i++ ) {
 	let element = document.createElement( 'input' );
 	element.setAttribute( 'type', 'radio' );
 

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>后台管理</title>
+</head>
+<body>
+{% for foo in vv %}
+    <p>{{ foo.times }}|{{ foo.isclose }}</p>
+{% endfor %}
+
+{% for foo in infor %}
+    <p>{{ foo.id }}-----{{ foo.ip }}{{ foo.name }}{{ foo.visit_time }}{{ foo.visit_times }}{{ foo.address }}{{ foo.position }}{{ foo.islogin }}{{ foo }}</p>
+{% endfor %}
+
+<button id="share">开启分享</button>
+<button id="closeshare">关闭分享</button>
+<script src="/static/js/jquery.js"></script>
+<script>
+    $('#share').click(function () {
+        $.ajax({
+            url: '../isShare/',
+            type: 'GET',
+            data: {
+                "state": 0
+            },
+            success: function (data) {
+                if (data['code'] === 200) {
+                    alert('开启分享操作成功！')
+                } else {
+                    alert('开启分享失败！')
+                }
+                window.location.reload()
+
+            }
+        })
+    });
+    $('#closeshare').click(function () {
+        $.ajax({
+            url: '../isShare/',
+            type: 'GET',
+            data: {
+                "state": 1
+            },
+            success: function (data) {
+                if (data['code'] === 200) {
+                    alert('关闭分享操作成功！')
+                } else {
+                    alert('关闭分享失败！')
+                }
+                window.location.reload()
+            }
+        })
+    });
+</script>
+</body>
+</html>

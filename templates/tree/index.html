@@ -5,18 +5,14 @@
     <meta name="description" content="圣诞树"/>
     <meta name="author" content="抱抱"/>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-{#    <meta name="viewport" content="width=device-width, initial-scale=1"/>#}
+    {#    <meta name="viewport" content="width=device-width, initial-scale=1"/>#}
     {#        <meta http-equiv="refresh" content="3">#}
-
     <title>Bui~</title>
-
     <link href="/static/css/ui.css" rel="stylesheet" media="screen"/>
     <link href="/static/css/domtree.css" rel="stylesheet" media="screen"/>
     <link href='https://fonts.googleapis.com/css?family=Armata' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="/static/css/audiobtn.css">
     <link rel="stylesheet" href="/static/css/style.css">
-    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
-    <script type="text/javascript" src="/static/js/audiobtn.js"></script>
 </head>
 <body>
 
@@ -27,9 +23,9 @@
 </div>
 
 <div style="position: absolute;">
-    <div class="wrapper">
+    <div class="wrapper" id="wrapper">
         <div class="display">
-            <div id="time">65232人</div>
+            <div id="time">分享{{ times }}次</div>
         </div>
         <span></span>
         <span></span>
@@ -37,25 +33,55 @@
 </div>
 
 <!-- 圣诞树 -->
-
 <div class="tree vintage4"><h1>{{ name }}，圣诞快乐！</h1></div>
-<script src="/static/js/domtree.js"></script>
-
-
 <!-- UI和第三方脚本 -->
 <p class="project-title vintage4" style="font-size: 25px; color: hotpink;">小伙伴，圣诞快乐！</p>
 
-</body>
-<script>
-    var _gaq = [['_setAccount', 'UA-15240703-1'], ['_trackPageview']];
-    (function (d, t) {
-        var g = d.createElement(t),
-            s = d.getElementsByTagName(t)[0];
-        g.async = true;
-        g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        s.parentNode.insertBefore(g, s);
-    })(document, 'script');
-</script>
+<script src="/static/js/jquery.js"></script>
+<script type="text/javascript" src="/static/js/audiobtn.js"></script>
+<script src="/static/js/domtree.js"></script>
 
+<script>
+    window.onload = function(){
+    　　setInterval(function (){
+          $.ajax({
+              url:'../../vister_v',
+              type:'GET',
+              success:function (data){
+                  var msg = '分享' + data['times'] + '次'
+                  $('#time').html(msg)
+                  {#console.log(data['isclose'])#}
+                  if (data['isclose']==='0'){
+                      {#alert('点击确定进入分享界面')#}
+                      window.location.href = "../../share";
+                  }
+              }
+          })
+      },2000)
+    }
+
+    $('#wrapper').click(function (){
+        window.location.href = "../../share";
+    })
+
+    /**$(window).unload(function(){
+        alert('666')
+        $.ajax({
+              url:'../../dom_close',
+              type:'GET',
+              data:{
+                'name': {{ name }}
+              },
+              async:false,
+              success:function (state){
+                  if (state['code'] === 200){
+                      alert('关闭成功')
+                  }
+              }
+        })
+    });**/
+
+</script>
+</body>
 
 </html>

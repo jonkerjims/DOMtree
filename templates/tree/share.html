@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="圣诞树"/>
+    <meta name="author" content="抱抱"/>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    {#        <meta http-equiv="refresh" content="3">#}
+    <title>Bui~</title>
+{#    <link href="/static/css/ui.css" rel="stylesheet" media="screen"/>#}
+    <link href="/static/css/domtree.css" rel="stylesheet" media="screen"/>
+{#    <link rel="stylesheet" href="/static/css/style.css">#}
+</head>
+    <body>
+        <div class="share_input">
+            <input name="name" id="name" type="text" placeholder="" value="">
+            <button id="send">S</button>
+            <br>
+            <p style="margin:10px 0 0 -50px">* 输入姓名，点击S生成专属圣诞树🎄~</p>
+            <div class="share_info hide" id="link">
+                【已为您生成好友** <b id="tag_name"></b> **的圣诞树🎄】<br><br>
+                <span>
+                    <p id="tag_href"></p>
+                    <br><br>
+                    <button class="btn" id="copy" >点击复制</button>
+                </span>
+            </div>
+        </div>
+        <script src="/static/js/jquery.js"></script>
+        <script src="/static/js/ClipBoard.js"></script>
+        <script>
+            $('#send').click(function (){
+                $("#link").fadeIn("slow");
+                {#name#}
+                var name = $('#name').val()
+                if(name === ''){
+                    name = 'Baby~';
+                }
+                {#获取当前href#}
+                var href = window.location.href.split('share/')[0]
+                {#中文编码#}
+                encode_name = encodeURI(name)
+                var newhref = href + 'index/' +encode_name
+                {#alert(newhref)#}
+                $('#tag_href').html(newhref)
+                $('#tag_name').html(name)
+            });
+
+
+            $('#copy').click(function (){
+                var txt = $('#tag_href').html()
+                var clipboard = new ClipboardJS('#copy', {
+           　　　　 text: function() {
+           　　　　    return txt;
+          　　　　  }
+        　　　　  });
+                clipboard.on('success',function (e){
+                    alert('复制成功',e)
+                    clipboard.destroy();
+                });
+                clipboard.on('error',function (e){
+                    alert('复制成功',e)
+                    clipboard.destroy();
+                });
+
+            })
+
+        </script>
+    </body>
+</html>

@@ -38,6 +38,9 @@ td {
   margin: 0;
   padding: 0;
 }
+input {
+  border-radius: 10px;
+}
 table {
   border-collapse: collapse;
   border-spacing: 0;
@@ -89,6 +92,7 @@ select {
   font-weight: inherit;
   outline-style: none;
   outline-width: 0pt;
+
 }
 legend {
   color: #000;
@@ -173,4 +177,84 @@ body {
 .tree * {
   position: absolute;
   transform-origin: 0 0;
+}
+
+.share_input{
+  height: 100%;
+  width: auto;
+  text-align: center;
+}
+
+.share_input input{
+  margin-top: 350px;
+  height: 25px;
+  width: 200px;
+  /*border: chartreuse;*/
+  border-color: #2ff3bf;
+  text-align: center;
+  background-color: rgba(178, 243, 241, 0.65);
+  color: #1b1b1b;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.share_input button{
+  margin-left: 25px;
+  width: 30px;
+  height: 30px;
+  background-color: #2ff3bf;
+  border-radius: 15px;
+  font-weight: 600;
+}
+
+.share_input input ::-webkit-input-placeholder{
+
+}
+
+.share_info{
+  width: 100%;
+  height: 100px;
+  margin-top: 50px;
+  /*margin-left: -30px;*/
+  border: #2ff3bf;
+  text-align: center;
+}
+
+.share_info span{
+  margin: auto auto;
+  display: block;
+  /*height: 100px;*/
+  width: 500px;
+  border: #14ffe9 1px solid;
+  border-radius: 25px;
+  /*background-color: #1b1b1b;*/
+  padding: 25px;
+  word-wrap:break-word;
+}
+
+.share_info button{
+  margin:auto auto;
+  width: auto;
+  height: 50px;
+  background-color: #2ff3bf;
+  border-radius: 15px;
+  font-weight: 600;
+}
+.hide{
+  display: none;
+}
+
+@media screen and (max-width: 480px) {
+    .share_input input{
+      margin-top: 300px;
+    }
+    .share_input button{
+      margin-left: 10px;
+    }
+    .share_input button:focus{
+      border: none;
+    }
+    .share_info span{
+      width: 250px;
+    }
 }

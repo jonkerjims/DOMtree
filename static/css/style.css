@@ -1,4 +1,4 @@
-*{
+.wrapper{
   margin: 0;
   padding: 0;
   font-family: 'Poppins', sans-serif;
@@ -28,9 +28,11 @@
   z-index: 999;
   height: 85px;
   width: 345px;
-  background: #1b1b1b;
+  /*background: rgba(101,6,6,65%);*/
+  background: black;
   border-radius: 6px;
   text-align: center;
+
 }
 .display #time{
   line-height: 85px;
@@ -38,10 +40,11 @@
   font-size: 50px;
   font-weight: 600;
   letter-spacing: 1px;
-  background: linear-gradient(135deg, #14ffe9, #ffeb3b, #ff00e0);
+  background: linear-gradient(135deg, #14ffe9, #ffeb3b, rgba(101, 6, 6, 0.64));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: animate 1.5s linear infinite;
+  -webkit-text-stroke:2px #ecea0c;
 }
 @keyframes animate {
   100%{

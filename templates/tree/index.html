@@ -4,63 +4,90 @@
     <meta charset="utf-8">
     <meta name="description" content="圣诞树"/>
     <meta name="author" content="抱抱"/>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    {#    <meta http-equiv="X-UA-Compatible" content="chrome=1">#}
     {#    <meta name="viewport" content="width=device-width, initial-scale=1"/>#}
     {#        <meta http-equiv="refresh" content="3">#}
     <title>Bui~</title>
-    <link href="/static/css/ui.css" rel="stylesheet" media="screen"/>
-    <link href="/static/css/domtree.css" rel="stylesheet" media="screen"/>
-    <link href='https://fonts.googleapis.com/css?family=Armata' rel='stylesheet' type='text/css'>
+    {#    <link href="/static/css/ui.css" rel="stylesheet" media="screen"/>#}
+    {#    <link href="/static/css/domtree.css" rel="stylesheet" media="screen"/>#}
+    {#    <link href='https://fonts.googleapis.com/css?family=Armata' rel='stylesheet' type='text/css'>#}
     <link rel="stylesheet" href="/static/css/audiobtn.css">
     <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/redtree.css">
 </head>
-<body>
+<body style="padding: 250px 0 0 0">
 
 <!--音乐-->
 <div class="video_exist play_yinfu" id="audio_btn" style="display: block;z-index:999999;">
     <div id="yinfu" class="rotate"></div>
-    <audio preload="auto" autoplay="autoplay" id="audio" src="/static/music/24_7.mp3" loop="loop"></audio>
+    <audio preload="auto" autoplay="autoplay" id="audio"  src="" loop="loop"></audio>
 </div>
 
-<div style="position: absolute;">
+<div style="position: absolute;top: 0px">
     <div class="wrapper" id="wrapper">
         <div class="display">
-            <div id="time">分享{{ times }}次</div>
+            <div id="time">点我{{ times }}次</div>
         </div>
         <span></span>
         <span></span>
     </div>
 </div>
 
-<!-- 圣诞树 -->
-<div class="tree vintage4"><h1>{{ name }}，圣诞快乐！</h1></div>
-<!-- UI和第三方脚本 -->
-<p class="project-title vintage4" style="font-size: 25px; color: hotpink;">小伙伴，圣诞快乐！</p>
+<div id="tree">
+    <div class="star"></div>
+</div>
+<div class="title">{{ name }},圣诞快乐</div>
 
+<div class="poem">
+    <p>We wish you a Merry Christmas;
+    <p>We wish you a Merry Christmas;
+    <p>We wish you a Merry Christmas
+    <p>And a Happy New Year.
+    <p>Good tidings we bring to you and your kin;
+    <p>Good tidings for Christmas and
+    <p>A Happy New Year.
+</div>
+
+<script src="/static/js/redtree.js"></script>
+{#<!-- 圣诞树 -->#}
+{#<div class="tree vintage4"><h1>{{ name }}，圣诞快乐！</h1></div>#}
+{#<!-- UI和第三方脚本 -->#}
+{#<p class="project-title vintage4" style="font-size: 25px; color: hotpink;">小伙伴，圣诞快乐！</p>#}
+{##}
 <script src="/static/js/jquery.js"></script>
 <script type="text/javascript" src="/static/js/audiobtn.js"></script>
-<script src="/static/js/domtree.js"></script>
+{#<script src="/static/js/domtree.js"></script>#}
 
 <script>
-    window.onload = function(){
-    　　setInterval(function (){
-          $.ajax({
-              url:'../../vister_v',
-              type:'GET',
-              success:function (data){
-                  var msg = '分享' + data['times'] + '次'
-                  $('#time').html(msg)
-                  {#console.log(data['isclose'])#}
-                  if (data['isclose']==='0'){
-                      {#alert('点击确定进入分享界面')#}
-                      window.location.href = "../../share";
-                  }
-              }
-          })
-      },2000)
+    window.onload = function () {
+        $('#audio').attr('src','/static/music/{{ music }}')
+        setInterval(function () {
+            $.ajax({
+                url: '../../vister_v',
+                type: 'GET',
+                success: function (data) {
+                    var msg = '点我' + data['times'] + '次'
+
+                    {#防止音乐两秒中断#}
+                    var musicObj = $('#audio')
+                    music = musicObj[0].src.split('music/')[1]
+                    if (data['music'] !== music){
+                        musicObj.attr('src','/static/music/'+data['music'])
+                    }
+
+                    $('#time').html(msg)
+
+                    {#console.log(data['isclose'])#}
+                    if (data['isclose'] === '0') {
+                        {#alert('点击确定进入分享界面')#}
+                        window.location.href = "../../share";
+                    }
+                }
+            })
+        }, 2000)
     }
 
-    $('#wrapper').click(function (){
+    $('#wrapper').click(function () {
         window.location.href = "../../share";
     })
 

@@ -16,3 +16,6 @@ class infor(models.Model):
     visit_time=models.DateTimeField(auto_now=True)
     islogin = models.IntegerField(default=0,max_length=1)
 
+class music(models.Model):
+    music = models.CharField(max_length=255)
+

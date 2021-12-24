@@ -8,13 +8,30 @@
 {% for foo in vv %}
     <p>{{ foo.times }}|{{ foo.isclose }}</p>
 {% endfor %}
+<button id="share">开启分享</button>
+<button id="closeshare">关闭分享</button>
+
+<div style="margin-top: 25px">
+    <select name="select_music" id="select_music">
+        {% for music in musicList %}
+            {% if selectedMusic == music %}
+                <option value="{{ music }}" selected="selected">{{ music }}</option>
+            {% else %}
+                <option value="{{ music }}">{{ music }}</option>
+            {% endif %}
+
+        {% endfor %}
+    </select>
+    <button id="updateMusic">修改音乐</button>
+</div>
+
+
 
 {% for foo in infor %}
     <p>{{ foo.id }}-----{{ foo.ip }}{{ foo.name }}{{ foo.visit_time }}{{ foo.visit_times }}{{ foo.address }}{{ foo.position }}{{ foo.islogin }}{{ foo }}</p>
 {% endfor %}
 
-<button id="share">开启分享</button>
-<button id="closeshare">关闭分享</button>
+
 <script src="/static/js/jquery.js"></script>
 <script>
     $('#share').click(function () {
@@ -49,6 +66,25 @@
                     alert('关闭分享失败！')
                 }
                 window.location.reload()
+            }
+        })
+    });
+    $('#updateMusic').click(function () {
+        var opt_values = $('#select_music option:selected').val();
+        $.ajax({
+            url: '../updateMusic/',
+            type: 'GET',
+            data: {
+                "opt_values": opt_values
+            },
+            success: function (data) {
+                if (data['code'] === 200) {
+                    alert('音乐修改成功！')
+                } else {
+                    alert('音乐修改失败！')
+                }
+                window.location.reload()
+
             }
         })
     });

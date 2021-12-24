@@ -10,7 +10,8 @@
     <title>Bui~</title>
 {#    <link href="/static/css/ui.css" rel="stylesheet" media="screen"/>#}
     <link href="/static/css/domtree.css" rel="stylesheet" media="screen"/>
-{#    <link rel="stylesheet" href="/static/css/style.css">#}
+    <link rel="stylesheet" href="/static/css/redtree.css">
+    <link rel="stylesheet" href="/static/css/style.css">
 </head>
     <body>
         <div class="share_input">
@@ -49,10 +50,15 @@
 
 
             $('#copy').click(function (){
+                var name = $('#name').val()
+                if(name === ''){
+                    name = 'Baby~';
+                }
                 var txt = $('#tag_href').html()
+                var msg = name + '，我特意给你植了一棵圣诞树，圣诞快乐！🎄' + txt + '\n--------\n戳一戳链接，或复制链接到浏览器查看吧。'
                 var clipboard = new ClipboardJS('#copy', {
            　　　　 text: function() {
-           　　　　    return txt;
+           　　　　    return msg;
           　　　　  }
         　　　　  });
                 clipboard.on('success',function (e){

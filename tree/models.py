@@ -5,6 +5,7 @@ from django.utils import timezone
 class visitv(models.Model):
     times = models.CharField(default=6000,max_length=255)
     isclose = models.CharField(default=1,max_length=255)
+    oldtimes = models.CharField(default=0,max_length=255)
 
 
 class infor(models.Model):

@@ -3,6 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <title>后台管理</title>
+    <style>
+        .tabtop13 {
+            margin-top: 13px;
+        }
+
+        .tabtop13 td {
+            background-color: #ffffff;
+            height: 25px;
+            line-height: 150%;
+        }
+
+        .font-center {
+            text-align: center
+        }
+
+        .btbg {
+            background: #e9faff !important;
+        }
+
+        .btbg1 {
+            background: #f2fbfe !important;
+        }
+
+        .btbg2 {
+            background: #f3f3f3 !important;
+        }
+
+        .biaoti {
+            font-family: 微软雅黑;
+            font-size: 26px;
+            font-weight: bold;
+            border-bottom: 1px dashed #CCCCCC;
+            color: #255e95;
+        }
+
+        .titfont {
+
+            font-family: 微软雅黑;
+            font-size: 16px;
+            font-weight: bold;
+            color: #255e95;
+        {#background: url(../images/ico3.gif) no-repeat 15px center;#} background-color: #e9faff;
+        }
+
+        .tabtxt2 {
+            font-family: 微软雅黑;
+            font-size: 14px;
+            font-weight: bold;
+            text-align: right;
+            padding-right: 10px;
+            color: #327cd1;
+        }
+
+        .tabtxt3 {
+            font-family: 微软雅黑;
+            font-size: 14px;
+            padding-left: 15px;
+            color: #000;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            line-height: 20px;
+        }
+    </style>
 </head>
 <body>
 {% for foo in vv %}
@@ -25,12 +88,50 @@
     <button id="updateMusic">修改音乐</button>
 </div>
 
+<div style="margin-top: 25px">
+    <input type="file" name="fileName1" id="fileName1"/>
+    <input type="button" onclick="sendToUser()" id="sendToUser" value="提交"/>
+</div>
 
 
-{% for foo in infor %}
-    <p>{{ foo.id }}-----{{ foo.ip }}{{ foo.name }}{{ foo.visit_time }}{{ foo.visit_times }}{{ foo.address }}{{ foo.position }}{{ foo.islogin }}{{ foo }}</p>
-{% endfor %}
+<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+    <tr>
+        <td align="center" class="biaoti" height="60">DOMtree后台管理系统</td>
+    </tr>
+    <tr>
+        {#        <td align="right" height="25">2017-01-02---2017-05-02</td>#}
+    </tr>
+</table>
 
+<table width="100%" border="0" cellspacing="1" cellpadding="4" bgcolor="#cccccc" class="tabtop13" align="center">
+    <tr>
+        <td colspan="2" class="btbg font-center titfont">ID</td>
+        <td width="10%" class="btbg font-center titfont">IP地址</td>
+        <td width="10%" class="btbg font-center titfont">赠送人 <b style="color: red;font-size: 14px">+{{ newUser }}</b>
+        </td>
+        <td width="10%" class="btbg font-center titfont">赠送时间</td>
+        <td colspan="2" class="btbg font-center titfont">查看次数</td>
+        <td colspan="2" class="btbg font-center titfont">地址</td>
+        <td colspan="3" class="btbg font-center titfont">经纬度</td>
+        <td colspan="3" class="btbg font-center titfont">是/否登录</td>
+    </tr>
+
+
+    {% for foo in infor %}
+        <tr class="font-center titfont">
+            {#        <td width="7%" rowspan="8" class="btbg1 font-center">受理处</td>#}
+            {#        <td width="7%" class="btbg2">王艳</td>#}
+            <td colspan="2">&nbsp;{{ foo.id }}</td>
+            <td width="10%">&nbsp;{{ foo.ip }}</td>
+            <td width="10%">&nbsp;{{ foo.name }}</td>
+            <td width="10%">&nbsp;{{ foo.visit_time }}</td>
+            <td colspan="2">&nbsp;{{ foo.visit_times }}</td>
+            <td colspan="2">&nbsp;{{ foo.address }}</td>
+            <td colspan="3">&nbsp;{{ foo.position }}</td>
+            <td colspan="3">&nbsp;{{ foo.islogin }}</td>
+        </tr>
+    {% endfor %}
+</table>
 
 <script src="/static/js/jquery.js"></script>
 <script>
@@ -88,6 +189,52 @@
             }
         })
     });
+</script>
+<script>
+    function sendToUser() { //在这里进行ajax 文件上传 用户的信息
+        var $file1 = $("input[name='fileName1']").val();//用户文件内容(文件)
+        // 判断文件是否为空
+        if ($file1 == "") {
+            alert("请选择上传的目标文件! ")
+            return false;
+        }
+        //判断文件类型,我这里根据业务需求判断的是Excel文件
+        var fileName1 = $file1.substring($file1.lastIndexOf(".") + 1).toLowerCase();
+        if (fileName1 != "mp3" && fileName1 != "flac") {
+            alert("请选择mp3或flac文件!");
+            return false;
+        }
+        //判断文件大小
+        var size1 = $("input[name='fileName1']")[0].files[0].size;
+        if (size1 > 104857600) {
+            alert("上传文件不能大于25M!");
+            return false;
+        }
+
+        boo1 = true;
+        var type = "file";
+        var formData = new FormData();//这里需要实例化一个FormData来进行文件上传
+        formData.append(type, $("#fileName1")[0].files[0]);
+        //多文件上传在这里继续append
+        //eg :
+        //formData.append(type,$("#fileName1")[0].files[0]);
+        $.ajax({
+            type: "post",
+            url: "../uploadToMusic/",
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                if (data == "error") {
+                    alert("文件提交失败!");
+                } else {
+                    $("input[name='userUrl']").val(data);
+                    alert("文件上传成功!");
+                }
+                window.location.reload()
+            }
+        });
+    }
 </script>
 </body>
 </html>

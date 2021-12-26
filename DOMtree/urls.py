@@ -17,4 +17,5 @@ from django.contrib import admin
 from django.urls import path, include
 urlpatterns = [
     path('tree/',include('tree.urls')),
+    path('NewYear/',include('NewYear.urls')),
 ]

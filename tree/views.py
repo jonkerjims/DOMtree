@@ -77,8 +77,14 @@ def dba(request):
     if request.method == 'POST':
         password = request.POST.get('password')
         if password == '970619':
-            infor = models.infor.objects.all().order_by('-id')
+            inforObj = models.infor.objects.all().order_by('-visit_time')
+            oldTimes = models.visitv.objects.filter(id=1)[0].oldtimes
             vv = models.visitv.objects.all()
+
+            infor = inforObj[0:100]
+            newUserCount = inforObj.count() - int(oldTimes)
+
+            models.visitv.objects.filter(id=1).update(oldtimes=inforObj.count())
             # 读取music下的所有音乐
             path = os.path.join(BASE_DIR,'static/music')
             musicList = os.listdir(path)
@@ -89,6 +95,7 @@ def dba(request):
                 'vv':vv,
                 'musicList':musicList,
                 'selectedMusic':selectedMusic,
+                'newUser':newUserCount,
             }
             return render(request,'DBA/index.html',context=data)
         else:
@@ -107,3 +114,19 @@ def updateMusic(request):
             'code': code,
         }
         return JsonResponse(data=state)
+
+
+def uploadToMusic(request):
+    data = 'error'
+    try:
+        if request.method == 'POST':
+            newMusic = request.FILES.get('file', None)
+            if newMusic:
+                dir = os.path.join(os.path.join(BASE_DIR, 'static'), 'music')
+                with open(os.path.join(dir, newMusic.name), 'wb+') as f:
+                    for chunk in newMusic.chunks():
+                        f.write(chunk)
+                data = 'success'
+        return HttpResponse(content=data)
+    except:
+        return HttpResponse(content=data)

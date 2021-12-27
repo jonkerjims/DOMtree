@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=0">
+    <link rel="stylesheet" type="text/css" href="/static/NewYearStatic/css/demo.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" href="/static/NewYearStatic/css/share.css">
+    <title>分享礼物</title>
+</head>
+<body>
+<div class="box">
+    <div>
+        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+            <legend>贺卡</legend>
+        </fieldset>
+        <form class="layui-form" action="{% url 'share' %}" method="post" enctype="multipart/form-data">
+            <div class="layui-input-block ">
+                <input type="text" name="sender" lay-verify="title" autocomplete="on" placeholder="你叫啥？"
+                       class="layui-input input" style="margin-left: 50px">
+            </div>
+            <div class="layui-input-block ">
+                <input type="text" name="addressee" lay-verify="title" autocomplete="off" placeholder="送给谁？"
+                       class="layui-input input">
+            </div>
+            <div class="layui-input-block ">
+                <input type="text" name="yourQQ" lay-verify="title" autocomplete="on" placeholder="你的QQ号（礼盒旁边的头像）"
+                       class="layui-input yourQQ">
+            </div>
+
+            <div class="layui-input-block ">
+                <input type="text" name="TAQQ" lay-verify="title" autocomplete="off" placeholder="TA的QQ号（HAPPY下面的头像）"
+                       class="layui-input TAQQ" >
+            </div>
+
+            <div class="layui-input-block layui-hide" style="color: #00f300;font-size: 18px;font-weight: 600">
+                上传TA丑照
+                <input type="file" name="fileName" />
+            </div>
+
+            <div class="layui-input-block">
+               <textarea placeholder="多少写点祝福de话(最多30个字，多了不显示)" name="textarea" class="layui-textarea textarea"></textarea>
+            </div>
+
+            <div class="layui-input-block " style="color: #00f300" >
+                <select name="music">
+                    {% for datum in data %}
+                        <option value="{{ datum.id}}">{{ datum.musicName }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <button class="layui-btn btn" type="submit">生成链接</button>
+        </form>
+    </div>
+</div>
+<script src="/static/layui/layui.js"></script>
+</body>
+</html>

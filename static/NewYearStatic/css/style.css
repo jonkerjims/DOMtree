@@ -1,0 +1,22 @@
+
+
+.img{
+    width: auto;
+    height: 100%;
+    /*margin-top: 400px;*/
+}
+
+@media screen and (max-width: 480px) {
+    .img{
+        display: block;
+        margin-top: 0;
+        margin-left: -115%;
+    }
+    .span{
+        display: none;
+    }
+    .background img{
+        height: 200px;
+        width: auto;
+    }
+}
